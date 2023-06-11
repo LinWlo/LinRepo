@@ -10,8 +10,9 @@ Welcome to Lin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   article/S_2023.md
-
+   article/So-Vits-Svc.md
+   article/Sphinx + Github + ReadTheDocs.md
+   article/Stable-Diffusion-webui.md
 
 Indices and tables
 ==================

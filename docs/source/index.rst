@@ -10,7 +10,7 @@ Welcome to Lin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   /article/S_2023.md
+   article/S_2023.md
 
 
 Indices and tables

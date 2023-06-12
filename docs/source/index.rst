@@ -11,6 +11,7 @@ Welcome to Lin's documentation!
    :caption: Contents:
 
    pythonstu/pythonBasic.md
+   project/openProject.md
 
 Indices and tables
 ==================

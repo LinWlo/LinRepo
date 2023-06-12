@@ -10,7 +10,6 @@ Welcome to Lin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   project/openProject.md
    pythonstu/pythonBasic.md
 
 Indices and tables

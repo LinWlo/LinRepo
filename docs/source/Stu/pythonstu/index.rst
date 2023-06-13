@@ -10,7 +10,7 @@ Welcome to Lin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   Stu/index.rst
+   pythonBasic.md
 
 Indices and tables
 ==================

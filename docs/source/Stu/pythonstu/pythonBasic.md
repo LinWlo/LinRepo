@@ -503,6 +503,8 @@
     print(f"{s}为数字" if s.isdecimal() else (f"{s}为字母" if s.isalpha() else f"{s}为其他字符"))   #注：识别不出中文
     ```
 
+# 控制结构
+
 
 
 

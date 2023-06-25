@@ -4,12 +4,10 @@
    contain the root `toctree` directive.
 
 
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   project/index.rst
-   pythonstu/index.rst
-   linux/index.rst
-
+   linuxbasic.md
 

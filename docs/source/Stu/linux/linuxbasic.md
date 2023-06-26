@@ -19,14 +19,14 @@
   - 5 graphical.target：图形界面;
   - 6 reboot.target：重启。
 
-## 1.3 target
+## 1.4 target
 - 用于对单元进行分组，或在启动后到达的目标
 - `ls /etc/systemd/system/multi-user.target.wants`：该目录下的所有服务会在multi-user.target这个默认target下启动
 - `systemctl list-dependencies multi-user.target`：查看unit依赖关系
 
-## 1.4 man bootup man systemd
+## 1.5 man bootup man systemd
 
-## 1.5 常用命令
+## 1.6 常用命令
 - `systemctl get-default`：默认target
 - `systemd-analyze time`：开机启动时间
 - `systemctl set-default graphical.target`：设置默认target

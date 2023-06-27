@@ -9,5 +9,5 @@
    :maxdepth: 2
    :caption: Contents:
 
-   markdownsyntax.md
+   markdownstu.md
 

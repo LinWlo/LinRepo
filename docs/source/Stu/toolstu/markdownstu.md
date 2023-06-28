@@ -18,6 +18,10 @@
 
 
 
-<script>
-console.log('hello?')
-</script>
+```es6
+console.log('run')
+function foo(){
+  console.log
+}
+foo()
+```

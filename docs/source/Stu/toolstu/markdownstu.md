@@ -14,14 +14,3 @@
      - `<span id='名称'>跳转到的正文内容</span>` 
   2. 在需要跳转处设置跳转点：
      - `<a href='#名称'>点击处的正文内容</a>`
-
-
-
-
-```es6
-console.log('run')
-function foo(){
-  console.log
-}
-foo()
-```

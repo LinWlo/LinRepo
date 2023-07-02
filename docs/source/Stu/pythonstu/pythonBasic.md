@@ -806,8 +806,8 @@
   p = lambda x:print(x) # 将关键字lambda声明的匿名函数在内存中的地址赋值给变量p
   p(2) # 2 , 调用函数
   # 例2:递归
-  p1 =  func = lambda n:1 if n == 0 else n * func(n-1)
-  print(func(5)) # 120
+  p1 = lambda n:1 if n == 0 else n * func(n-1)
+  print(p1(5)) # 120
   ```
 
 

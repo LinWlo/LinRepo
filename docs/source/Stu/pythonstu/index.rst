@@ -9,4 +9,5 @@
    :caption: Contents:
 
    pythonBasic.md
+   basic.md
 

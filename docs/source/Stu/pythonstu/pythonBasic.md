@@ -4,14 +4,14 @@
 - 隔离每个项目所需要的不同的依赖，避免由于不同的项目需要不同的依赖库版本而造成的冲突情况。
 ### 1.2. 创建虚拟环境
 #### 1.2.1. 命令行创建
-- 主流的虚拟环境管理包：`virtualenv`和`pipenv`
+- **主流的虚拟环境管理包**：`virtualenv`和`pipenv`
   - 安装`virtualenv`：`pip install virtualenv`
   - 创建虚拟环境：`virtualenv [-p 解释器路径] 路径`
     - `-p`可选的，指定python解释器版本
   - 切换为虚拟环境：
     - 进入虚拟环境路径中的`Script`中，运行`activate.bat`
     - 退出虚拟环境：运行`deactivate.bat`
-- `virtualenvwrapper`：virtualenv虚拟环境管理工具的一个辅助包。
+- **virtualenvwrapper**：virtualenv虚拟环境管理工具的一个辅助包。
   - 安装：`pip install virtualenvwrapper`
     - `wornon`命令不能用时，安装`pip install virtualenvwrapper-win`
   - 作用：简化virtualenv的操作，可以在任意路径操作虚拟环境。
@@ -24,17 +24,17 @@
 #### 1.2.2. pycharm创建
 - 新建项目时，选择Virtualenv新建环境。
 
-## 2. python和python的区别
-- `print`
+## 2. python2和python3的一些区别
+- **print**
   - python2中是一个语句
   - python3中是一个函数(可以接收参数)；
-- 字符编码
+- **字符编码**
   - python2中默认编码格式ASCII，不支持中文，需要在开头通过`#coding:utf8`才行；
   - python3默认为`utf8`。不需要再开头指定；
-- `input`
+- **input**
   - python2中会根据输入的数据类型返回相应数据类型的值，输入数字返回数字，输入字符串必须加双引号，否则会以变量的形式返回。
   - python3中输入数据全部以字符串返回。
-- 除法
+- **除法**
   - python2同c语言一样，两个整数的运算结果只能是整数，存在结果有小数部分直接丢弃。如`1/2=0`,要得到正确的值需要用浮点数计算`1.0/2=0.5`;
   - python3中整数除法保留小数部分。
 ## 3. 标识符、变量和对象

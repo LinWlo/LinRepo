@@ -442,7 +442,6 @@
 - `values()`：以dict_values 返回字典所有的值。其类型为dict_values，可通过`list()` `set()` `tuple`转换为相应类型，或者for loop取出；
 - `items()`：以dict_items返回字典所有的键值对，其类型为dict_items，可通过`list()` `set()` `tuple`转换为相应类型，或者for loop取出（元组形式）；
 - `update(dict)`：将指定字典的键值对添加到原字典中，原字典key已存在则更新原字典中的value;
-  - 
 - `formkeys(iter,value)`：以可迭代对象中的元素作为key，value作为值创建字典，如果value省略，则为Null;
 - 深拷贝和浅拷贝：同列表相似
   - 浅拷贝：直接赋值，就是将字典的引用/指向进行拷贝，而不是拷贝的这个字典对象，也就是说是同一个空间地址。

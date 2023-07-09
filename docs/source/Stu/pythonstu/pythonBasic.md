@@ -1577,7 +1577,7 @@ class ClsName: # 默认继承object类
 - 协议：也就是标准
 ### tcp和udp协议
 - tcp数据包结构
-  ![Alt text](image/tcp%E6%95%B0%E6%8D%AE%E5%8C%85%E7%BB%93%E6%9E%84.png)
+  ![Alt text](image/tcp.png)
 ### socket编程
 ### http协议基础
 

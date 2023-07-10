@@ -1676,7 +1676,7 @@ class ClsName: # 默认继承object类
 - **url组成**：
   | 协议 | 主机名(ip地址) | 端口 | 资源路径 |
   | --- | --- | --- | --- |
-  | https | : //linrepo.readthedocs.io | 443  | /en/latest/Stu/pythonstu/pythonBasic.html
+  | https | : //linrepo.readthedocs.io | :443  | /en/latest/Stu/pythonstu/pythonBasic.html
   - **协议**：常用为http和https;
   - **服务器域名或ip**：计算机无法通过域名找到服务器，需要使用DNS(域名解析服务器)解析为对应的ip地址；
   - **端口号**：http默认端口为80.https默认端口为443，如果访问的是默认端口号可以省略不写；

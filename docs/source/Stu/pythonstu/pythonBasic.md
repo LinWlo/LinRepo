@@ -1674,6 +1674,7 @@ class ClsName: # 默认继承object类
 #### URL
 - HTTP使用url来进行资源定位。url指统一资源定位符，通常由三部分组成：资源访问机制、存放资源的主机名、资源自身名字(路径)。客户端就通过url向服务器发送请求
 - **url组成**：
+
   | 协议 | 主机名(ip地址) | 端口 | 资源路径 |
   | - | - | - | - |
   | https | : //linrepo.readthedocs.io | :443  | /en/latest/Stu/pythonstu/pythonBasic.html

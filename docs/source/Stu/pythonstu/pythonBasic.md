@@ -1758,8 +1758,17 @@ class ClsName: # 默认继承object类
   - **5xx**：服务器错误，服务器在处理请求的过程中发生了错误。
     - `500`：Internal Server Error，服务器内部错误，无法完成请求（服务器遇到了一个未曾预料的状况，一般是服务器程序码出错）
     - `502`：Bad Getway，网关或代理服务器执行了请求，客户端从远程服务器收到了一个无效响应
+- **Content-Type**
+  - 请求或响应的数据类型
+  - 服务端返回响应常见数据类型
+    - `text/plain`：纯文本格式（字符串）。
+    - `text/html`：html格式。
+    - `application/json`：json格式。
+  - 客户端发出请求常见数据类型
+    - `application/x-www-form-urlencoded`：将form表单数据编码为key-value格式（即以字典的形式向服务端提交数据）。
+    - `multipart/form-data`：上传文件常用格式。
 
-### urllib模拟发送http请求
+#### urllib模拟发送http请求
 - `user-agent`:用户代理，帮助服务器识别当前的http请求是通过什么发送的。
 - 使用步骤：
   - 导入模块：`import urllib.request` `import usrllib.parse`
@@ -1774,6 +1783,29 @@ class ClsName: # 默认继承object类
   - 通过抓包得到登陆时的cookie
   - 将cookie加入请求参数中
 
+### https协议
+#### 概念
+- (全称：Hypertext Transfer Protocol Secure)，超文本传输安全协议，https是在http的基础之上 加入了SSL（secure socket layer），从而实现传输加密和身份认证，保证了传输过程的安全性。
+#### 通信过程
+  ![Alt text](image/chatprocess.png)
+  1. 客户端发起https请求，包含客户端支持的ssl版本，加密算法信息。
+  2. 服务端返回公钥证书、加密算法（客户端、服务端同时支持的加密算法中选择一个最安全的）。
+  3. 客户端收到公钥证书后验证是否有效，如果无效提示警告信息。
+  4. 公钥证书有效，客户端生成一个key值。
+  5. 利用公钥对key进行加密，然后将加密后的密文发送给服务端。
+  6. 服务端收到密文后，利用私钥进行解密，从而得到key。
+  7. 服务端利用选中的加密算法对key和响应的信息进行加密，发送给客户端。
+  8. 客户端收到响应后，使用相同加密算法对响应的内容进行解密，到此https的握手过程结束。
+
+### session和cookie的区别
+
+  | 区别 | cookie | session |
+  | :-- | :-- | :-- | 
+  | 保存位置 | 客户端 | 服务端 |
+  | 存储限制 | 单个cookie一般不超过4kb<br>单个站点一般不超过20个cookie | 没有限制 |
+  | 存储方式 | 一般保存为二进制或者Unicode编码的数据 | 没有限制 |
+  | 安全性 | 低 | 高 |
+  | 跨域 | 支持跨域 | 不支持 | 
 
 
 

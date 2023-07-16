@@ -24,7 +24,7 @@
 #### 1.2.2. pycharm创建
 - 新建项目时，选择Virtualenv新建环境。
 
-## 2. python2和python3的一些区别
+## 2. python和python的一些区别
 - **print**
   - python2中是一个语句
   - python3中是一个函数(可以接收参数)；
@@ -1266,7 +1266,7 @@ class ClsName: # 默认继承object类
 - **重写**
   - 完全重写：子类中的属性或方法名与父类相同，子类只调用自己的，不会调用父类的属性或方法。
   - **构造方法的重写**
-    - 子类重写构造方法并继承父类的构造方法，可以在子类构造方法内部使用`父类名.__init__(self, 父类中的参数)`或`super(子类名.self).__init__(父类中的参数)`来继承父类的构造方法
+    - 子类重写构造方法并继承父类的构造方法，可以在子类构造方法内部使用`父类名.__init__(self, 父类中的参数)`或`super(父类名, self).__init__(父类中的参数)`来继承父类的构造方法
       ```python
       class Student:
 
@@ -1683,7 +1683,7 @@ class ClsName: # 默认继承object类
   - **服务器域名或ip**：计算机无法通过域名找到服务器，需要使用DNS(域名解析服务器)解析为对应的ip地址；
   - **端口号**：http默认端口为80.https默认端口为443，如果访问的是默认端口号可以省略不写；
   - **资源路径**：在服务器上的路径地址，有些可以不写，默认访问首页。
-#### 请求的大致过程
+#### 15.4.3. 请求的大致过程
 1. 首先，在浏览器地址栏中输入url；
 2. 浏览器先查看浏览器缓存-系统缓存-路由器缓存，如果缓存中有，会直接在屏幕中显示页面内容。若没有，则跳到第三步操作；
 3. 在发送http请求前，需要域名解析(DNS解析)，解析获取相应的IP地址；
@@ -1693,7 +1693,7 @@ class ClsName: # 默认继承object类
 7. 服务器通过`Connection:keeo-alive`实现tcp的长久连接；
 8. 浏览器收到HTTP响应，处理相关数据。根据情况选择关闭TCP连接（四次挥手）或者保留重用。
 
-#### http协议的特性
+#### 15.4.4. http协议的特性
 - http通过请和响应的交换来达成通信；
 - http是无状态的协议，所以引入了cookie(客户端)和session(服务端)技术来管理通信状态；
 - http使用url进行资源定位；
@@ -1701,7 +1701,7 @@ class ClsName: # 默认继承object类
 - 持久化连接，通过请求头中`Connection:keep-alive`，即只要一方不断开连接，tcp持久连接；
 - 管线化访问，并行访问，不用等待上一个请求完成才能发起下一个请求；
 
-#### 请求报文
+#### 15.4.5. 请求报文
 - **结构**
   ![Alt text](image/request.png)
   - 第一部分：表示请求方法、请求资源、协议及其版本；
@@ -1733,7 +1733,7 @@ class ClsName: # 默认继承object类
     - 如`https://www.baidu.com/s?tn=44004473_13_oem_dg&ie=utf-8&wd=yi`:`?`前为url，之后为请求数据，如果数据是英文字母或数字，则原样发送；如果是空格，转换为`+`；如果是中文或其他字符，则直接把字符串用`base64`加密。
   - GET参数通过URL传递，POST放在Request body中。
   - GET产生一个TCP数据包；POST产生两个TCP数据包。
-#### 响应报文
+#### 15.4.6. 响应报文
 - **结构**
   ![Alt text](image/response.png)
   - 第一部分：协议及版本，HTTP响应码。
@@ -1768,7 +1768,8 @@ class ClsName: # 默认继承object类
     - `application/x-www-form-urlencoded`：将form表单数据编码为key-value格式（即以字典的形式向服务端提交数据）。
     - `multipart/form-data`：上传文件常用格式。
 
-#### urllib模拟发送http请求
+#### 15.4.7. 模拟发送http请求
+##### 15.4.7.1. urllib模拟发送http请求
 - `user-agent`:用户代理，帮助服务器识别当前的http请求是通过什么发送的。
 - 使用步骤：
   - 导入模块：`import urllib.request` `import usrllib.parse`
@@ -1777,16 +1778,38 @@ class ClsName: # 默认继承object类
     - 将数据编码为请求头所需格式；`data = data.parse.urlencode(data).encode()`
   - 构造请求对象：`req = urllib.request.Request('url', headers={"User_Agent":"xxx"}, data=data)`
     - 设置要访问的url和用户代理
-  - 发起请求，返回响应对象：`resp = usrllib.request.urlopen(req)`
+  - 发起请求，返回响应对象：`resp = urllib.request.urlopen(req)`
   - 打印响应内容：`print(resp.read().decode())`
 - 通过cookie绕过登陆
   - 通过抓包得到登陆时的cookie
   - 将cookie加入请求参数中
 
-### https协议
-#### 概念
+##### 15.4.7.2. requests模拟发送http请求
+- 模块：`requests`，第三方模块。需要安装后使用
+- 常用方法：`requests.方法`
+  - `session()`：创建session对象，用于会话保持。之后使用该对象去发送请求。
+    - 即登陆完成后，可以访问登陆后的任意信息
+  - `get(url,params,headers)`：向服务端发送get请求。返回对象
+    - `url`：请求地址
+    - `params`：请求参数，通常以字典方式传入。
+    - `header`：请求头，通常以字典方式传入。
+  - `post(url,data,headers)`：向服务端发送post请求。返回对象
+    - `url`：请求地址
+    - `data`：请求参数，通常以字典方式传入。
+    - `header`：请求头，通常以字典方式传入。
+    - 需要上传文件，则传入参数：`files={'参数名':open(file,'rb')}`，rb：以二进制文件打开。
+      - 参数名由抓包获取
+- get或者post返回对象的常用方法
+  - `text`：以字符串返回服务端的响应
+  - `content`：以字节返回服务端的响应
+  - `json()`：以json返回服务端的响应
+  - 注：有些网址使用这些方法返回不完全内容，加上请求头 'User-Aget' 及其内容。
+- `request(method,url,**kwargs)`：通用的请求方法
+
+### 15.5. https协议
+#### 15.5.1. 概念
 - (全称：Hypertext Transfer Protocol Secure)，超文本传输安全协议，https是在http的基础之上 加入了SSL（secure socket layer），从而实现传输加密和身份认证，保证了传输过程的安全性。
-#### 通信过程
+#### 15.5.2. 通信过程
   ![Alt text](image/chatprocess.png)
   1. 客户端发起https请求，包含客户端支持的ssl版本，加密算法信息。
   2. 服务端返回公钥证书、加密算法（客户端、服务端同时支持的加密算法中选择一个最安全的）。
@@ -1797,7 +1820,7 @@ class ClsName: # 默认继承object类
   7. 服务端利用选中的加密算法对key和响应的信息进行加密，发送给客户端。
   8. 客户端收到响应后，使用相同加密算法对响应的内容进行解密，到此https的握手过程结束。
 
-### session和cookie的区别
+### 15.6. session和cookie的区别
 
   | 区别 | cookie | session |
   | :-- | :-- | :-- | 
@@ -1807,6 +1830,288 @@ class ClsName: # 默认继承object类
   | 安全性 | 低 | 高 |
   | 跨域 | 支持跨域 | 不支持 | 
 
+## 16. 多线程和多进程
+### 16.1. 线程和进程的概念
+- **进程和线程**
+- 进程：计算机内部独立分配资源的基本单位，每个进程都有独立的地址空间，打开一个软件或者程序后会至少产生一个进程。
+- 线程：一个进程运行后至少会产生1个线程，线程是进程中进行CPU调度的基本单位，进程中的若干线程可以共享进程中的资源。
+- **进程和线程之间的关系**
+  - 一个线程只能属于一个进程，一个进程可以有多个线程，每个进程至少有一个线程（主线程）；
+  - 资源分配给进程，一个进程中的所有线程将共享该进程中所有资源；
+  - 线程在执行过程中，需要协作同步，不同进程间的线程需要利用消息同步机制来实现通讯；
+  - 真正执行任务的是线程，它是进程内可调度的实体。
+- **串行、并行和并发**
+  - 串行：一次只能取得一个任务并执行这个任务，这个任务执行完后面的任务才能继续；
+  - 并行：指的是在同一时刻，多个任务同时执行，相当于多个人同时完成多件事；
+    - 并行必须有多核才能实现，否则只能实现并发（伪并行）
+  - 并发：指的是在同一个**时间段**内，多个任务同时执行（伪并行），相当于一个人在一个时间段内同时做很多事；
+### 16.2. 创建多线程
+#### 16.2.1. 模块
+- `_thread`：python3之前thread模块的重命名，它是比较底层的模块，一般不会在代码中直接使用；
+- `threading`：python3之后的线程模块，一般使用这个模块来创建线程。
+#### 16.2.2. 通过Thread类构造器来创建线程(常用)
+- **创建线程**：`threading.Thread(target=func, args=(value1, value2, ...))`，返回一个对象
+  - `target=func`：指定线程要执行的任务，传入的值为函数名或方法名(不是调用，不加括号)
+  - `args=(value1, value2, ...)`：可选的，根据待执行的函数或方法传入实参，必须以元组传入
+- **线程的操作**：`对象.方法`
+  - `start()`：启动子线程
+  - `join()`：阻塞，让使用了join方法的子线程跟随主线程结束而结束，必须在start方法**后**设置
+  - `setDaemon(True)`：守护，让子线程跟随主线程结束而解释，必须在start方法前设置
+#### 16.2.3. 通过继承Thread类来创建线程
+  ```python
+  import urllib.request
+  import threading
+  class NewThread(threading.Thread): # 继承Thread类
+      def __init__(self, url): # 加入新属性，重写构造方法
+          super(NewThread, self).__init__() # 调用父类的构造方法，保证父类初始化成功
+          self.url = url
+      def run(self): # 重写父类的run方法，定义在新的线程里面要完成的任务。运行时会自动调用该方法
+          header = {
+              "User_Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67"
+          }
+          req = urllib.request.Request(self.url, headers=header)
+          resp = urllib.request.urlopen(req)
+          print(resp.read().decode()[:100])
+  if __name__ == '__main__':
+      t1 = NewThread("https://www.bilibili.com/")
+      t2 = NewThread("https://www.baidu.com/")
+      t1.start()
+      t2.start()
+      t1.join()
+      t2.join()
+      print("End")
+  ```
+### 16.3. 锁
+#### 16.3.1. GIL
+##### 16.3.1.1. 概念
+- 全局解释器锁，每个线程在执行的过程中都需要先获取GIL，保证同一时刻只有一个线程在运行，目的是解决多线程同时竞争程序中的全局变量而出现的线程安全问题;
+- 它并不是python语言的特性，仅仅是由于历史的原因在CPython解释器中难以移除，因为python语言运行环境大部分默认在CPython解释器中;
+##### 16.3.1.2. 计算密集型和IO密集型
+- 计算密集型：要进行大量的数值计算，例如进行上亿的数字计算、计算圆周率、对视频进行高清解码等等。这种计算密集型任务虽然也可以用多任务完成，但是花费的主要时间在任务切换的时间，此时CPU执行任务的效率比较低；
+- IO密集型：涉及到网络请求(time.sleep())、磁盘IO的任务都是IO密集型任务，这类任务的特点是CPU消耗很少，任务的大部分时间都在等待IO操作完成（因为IO的速度远远低于CPU和内存的速度）。对于IO密集型任务，任务越多，CPU效率越高，但也有一个限度。
+##### 16.3.1.3. 线程释放GIL锁的情况
+- 在IO操作等可能会引起阻塞的system call之前,可以暂时释放GIL,但在执行完毕后,必须重新获取GIL；
+- .Python 3.x使用计时器（执行时间达到阈值后，当前线程释放GIL）或Python 2.x，tickets计数达到100。
+#### 16.3.2. 线程锁
+- **作用**：解决多个子线程同时操作全局变量时的数据冲突问题，确保数据的准确性，但会在一定程度上降低程序运行的效率。
+- **使用步骤**：
+  - **创建锁**：`lock = threading.Lock()`，返回一个对象；
+  - **获取锁**：`lock.acquire()`
+    - 子线程在编辑全局变量前获取锁，此时全局变量被锁定，只能由当前线程编辑，其他线程处于等待状态
+  - **释放锁**：`lock.release()`
+    - 当前子线程完成编辑后一定要释放锁，不然其他线程拿不到锁就不能执行，一直卡住
+  - **with语句**:实现自动释放锁，后面可不加`release()`
+    ```python
+    with 线程锁对象名:
+      语句
+      ... 
+    ```
+### 16.4. 线程间通讯
+#### 16.4.1. 线程间通讯的方式
+- **Event**：主要用于通过事件通知机制实现线程的大规模并发；
+- **Condition**：主要用于多个线程间轮流交替执行任务；
+- **Queue**：主要用于不同线程间任意类型数据的共享
+#### 16.4.2. Queue
+- 导入模块：`form queue import Queue`
+- 创建消息队列对象：
+  - 线程队列对象：`q = Queue(maxsize=0)`
+  - 进程队列对象：`q = multiprocessing.Queue(maxsize=0)`
+  - `maxsize`；可选的，最多往队列放入多少消息，0或省略表示无限制
+- 发送消息到队列：`q.put()`
+- 从消息队列获取消息：`q.get(timeout=1)`
+  - `timeout`：获取消息的超时时间，省略表示一直等待
+### 16.5. 进程
+#### 16.5.1. 进程的状态
+- 
+#### 16.5.2. 以指定函数作为参数创建进程
+- 内置模块：`import multiprocessing`
+- 创建进程：`multiprocessing.Process(target=func,args=(value1,value2,……))`，返回一个对象。 
+  - `target=func`，指定进程要执行的任务，传入的值为函数名或者方法名（不能在名字后面加括号）。
+  - `args=(value1,value2,……)`：可选的，根据待执行的函数或者方法传入实参，必须以元组传入。
+- 进程的操作：`进程对象.方法`
+  - `start()`：启动子进程
+  - `join(timeout=None)`：阻塞，让主进程在子进程结束后再结束，必须在start后设置。
+    - `timeou=None`：可选的，默认参数，表示一直等待到子进程结束。也可以自己设置等待时间。
+  - `daemon = True`：守护，让子进程跟随主进程结束而结束，必须在start前设置。
+    - 比如一些收集主进程日志的程序，主进程结束了就没有可收集的了。
+
+#### 16.5.3. 继承Process类创建进程
+  ```python
+  import urllib.request
+  import os
+  import multiprocessing
+  class NewProcess(multiprocessing.Process): # 继承Thread类
+      def __init__(self, url): # 加入新属性，重写构造方法
+          super(NewProcess, self).__init__() # 调用父类的构造方法，保证父类初始化成功
+          self.url = url
+      def run(self): # 重写父类的run方法，定义在新的进程里面要完成的任务。运行时会自动调用该方法
+          header = {
+              "User_Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67"
+          }
+          req = urllib.request.Request(self.url, headers=header)
+          resp = urllib.request.urlopen(req)
+          print(f"进程id为：{os.getpid()}", f"父进程id为：{os.getppid()}")
+          print(resp.read().decode()[:100])
+  if __name__ == '__main__':
+      print(os.getpid())
+      t1 = NewProcess("https://www.bilibili.com/")
+      t2 = NewProcess("https://www.baidu.com/")
+      t1.start()
+      t2.start()
+      t1.join()
+      t2.join()
+      print("End")
+  ```
+### 16.6. 进程间通讯
+- 队列：通过队列，实现进程间的通信。
+  - 即A进程将要发送的信息发送到队列，B进程再从队列中拿到这个信息。从而间接实现进程间的通信，使用上述[Queue](#queue)来实现
+
+### 16.7. 多进程和多线程的优缺点
+- 多进程：
+  - 优点：独立运行，互不影响
+  - 缺点：资源消耗大
+- 多线程：
+  - 优点：效率高，不会消耗大量资源
+  - 缺点：稳定性较差，一个崩溃后会影响整个进程
+- 使用场景：
+  - 多进程：[计算密集型任务](#计算密集型和io密集型)，适合多进程
+  - 多线程：[IO密集型任务](#计算密集型和io密集型)，比如文件读取，爬虫等，适合多线程
+
+## 17. 装饰器
+### 装饰器的概念和意义
+#### 装饰器基本概念
+- 装饰其他函数的，为其他函数添加指定功能的函数；
+- <span id='zhuangshi'>装饰器函数的两个原则</span>：
+  - 装饰器不能修改被装饰函数的源码；
+  - 装饰器不能修改被装饰函数的调用方式。
+#### 函数即变量
+- 函数可以直接被调用，也可以作为变量进行性赋值；
+  - 函数的本质是一串字符串，这串字符串会保存在内存空间中，函数名就是指向这个地址的
+- 在函数定义中去调用其他函数时，并不会立即调用该函数；
+- 在执行一个调用了其他函数的函数时，如果在内存中还没有找到被调用函数的定义，则程序会报错。
+#### 高阶函数
+- 符合下列条件之一的函数就是高阶函数
+  - 接收函数名作为形参
+  - 返回值中包含函数名
+  ```python
+  def func1():
+    print("func1")
+  # 接收参数为函数名
+  def func2(fun):
+      print(fun)  # 运行func1函数前附加的功能
+      fun()
+  # 返回值为函数名
+- 以以上知识写一个统计函数运行时间的函数
+  ```python
+  import time
+  def func1():
+      print("func1")
+      time.sleep(3)
+  def count_time(func):
+      start_time = time.time()
+      func()
+      end_time = time.time()
+      print(end_time - start_time)
+  count_time(func1)
+  ```
+  - 注：该函数仅为一个高阶函数，并不是一个装饰器，因为不符合<a href='#zhuangshi'>装饰器的基本原则</a>
+    - 改变了调用方式，func1通过coung_time来调用的
+  func2(func1)
+- 高阶函数对编写装饰器的意义
+  - 接收函数名作为形参：不改变被装饰函数的代码的前提下增加功能；
+  - 返回值中包含函数名：不该变倍装饰函数的调用方式。
+#### 嵌套函数
+- 通过`def`关键字定义在另一个函数中的函数叫做嵌套函数
+- 装饰器就是高阶函数加上嵌套函数，所以上述计时函数可以写为：
+  ```python
+  import time
+  def func1():
+      print("func1")
+      time.sleep(3)
+  def count_time(func):
+      def inside():
+          start_time = time.time()
+          func()
+          end_time = time.time()
+          print(end_time - start_time)
+      return inside
+  func1 = count_time(func1) # 将返回值inside赋值给func1
+  func1() # 其实调用的运行的是inside函数
+  ```
+  - 上面的count_time函数就是一个装饰器，符合装饰器的基本原则；
+  - 上述调用过于麻烦，python中也提供了一个语法糖`@`，在被装饰函数上通过`@装饰函数`来调用这个装饰函数
+  ```python
+  @count_time # 实际上就是做的 func1 = count_time(func1) 这个操作
+  def func1():
+      print("func1")
+      time.sleep(3)
+  func1()
+  ```
+- 装饰器基本编写
+  1. 定义一个接收函数名作为参数的高阶函数；
+  2. 在高阶函数中定义一个嵌套函数，在该嵌套函数中：
+     - 封装想要添加的功能代码
+     - 调用作为参数传入的函数名
+     - 返回嵌套函数的函数名 
+### 装饰器的常见类型和编写
+#### 被装饰函数带参数
+  ```python
+  import time
+  def count_time(func):
+      def inside(*args, **kwargs): # 传入若干形参
+          start_time = time.time()
+          func(*args, **kwargs)  # 通过传入的形参传入实参
+          end_time = time.time()
+          print(end_time - start_time)
+      return inside
+  @count_time
+  def func1(name, age):
+      print(f"{name}已经{age}岁了！")
+      time.sleep(3)
+  func1("二麻子", 18)
+  ```
+#### 装饰器本身带参数
+  ```python
+  import time
+  def count_time(timetype):  # 最外层函数接收@count_time传入的参数
+      print(f"时间类型为{timetype}")
+      def outside(func):  # 嵌套的这层函数接收被装饰函数名作为参数
+          def inside(*args, **kwargs):
+              start_time = time.time()
+              func(*args, **kwargs)
+              end_time = time.time()
+              print(end_time - start_time)
+          return inside
+      return outside
+  @count_time(timetype="second") # 实际操作为 func1 = count_time(timetype="second")(func1)，即运行的ouside(func1)
+  def func1(name, age):
+      print(f"{name}已经{age}岁了！")
+      time.sleep(3)
+  func1("二麻子", 18) # 实际执行的是 inside("二麻子", 18)
+  ```
+#### 被装饰函数带返回值
+  ```python
+  import time
+  def count_time(timetype):
+      print(f"时间类型为{timetype}")
+      def outside(func):
+          def inside(*args, **kwargs):
+              start_time = time.time()
+              res = func(*args, **kwargs)  # 用res接收传入的func的反回值
+              end_time = time.time()
+              print(end_time - start_time)
+              return res  # 返回func的返回值
+          return inside
+      return outside
+  @count_time(timetype="second")
+  def func1(name, age):
+      print(f"{name}已经{age}岁了！")
+      time.sleep(3)
+      return name
+  print(func1("二麻子", 18))  # 获取到func1的返回值"二麻子"
+  ```
+### 函数闭包
+### 闭包和装饰器的区别
 
 
 

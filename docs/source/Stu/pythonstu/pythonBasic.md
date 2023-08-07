@@ -2320,3 +2320,35 @@ class ClsName: # 默认继承object类
 
 
 
+## python实现ssh登陆
+```python
+
+import paramiko
+import pytest
+
+# 登录接口的基本信息
+SSH_HOST = '192.168.42.129'
+SSH_PORT = 22
+SSH_USERNAME = 'root'
+SSH_PASSWORD = 'root'
+
+def test_ssh_login_success():
+    # 创建SSH客户端
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    try:
+        client.connect(hostname=SSH_HOST, port=SSH_PORT, username=SSH_USERNAME, password=SSH_PASSWORD)
+        stdin, stdout, stderr = client.exec_command('tail -3 /var/log/audit/audit.log')
+        output = stdout.read().decode().strip()
+    except paramiko.AuthenticationException:
+        print("ssh连接失败")
+        output = ''
+
+    finally:
+        client.close()
+    assert 'hostname=192.168.42.1 addr=192.168.42.1 terminal=ssh res=success' in output
+
+if __name__ == '__main__':
+    pytest.main(['-s'])
+```

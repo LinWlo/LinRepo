@@ -2339,6 +2339,7 @@ def test_ssh_login_success():
 
     try:
         client.connect(hostname=SSH_HOST, port=SSH_PORT, username=SSH_USERNAME, password=SSH_PASSWORD)
+        #  exec_command 方法来执行远程命令。该方法返回一个三元组，包含了命令的标准输入、标准输出和标准错误输出。
         stdin, stdout, stderr = client.exec_command('tail -3 /var/log/audit/audit.log')
         output = stdout.read().decode().strip()
     except paramiko.AuthenticationException:
@@ -2351,4 +2352,40 @@ def test_ssh_login_success():
 
 if __name__ == '__main__':
     pytest.main(['-s'])
+```
+
+## 并发执行命令
+- 有时候，我们需要同时执行多个命令，并等待它们的结果。paramiko 提供了 Channel 类来实现并发执行命令
+```python
+import paramiko
+
+# 创建 SSH 客户端对象
+client = paramiko.SSHClient()
+
+# 允许连接到不在 known_hosts 文件中的主机
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+# 连接到远程主机
+client.connect('localhost', username='your_username', password='your_password')
+
+# 打开一个 SSH 会话通道
+channel = client.get_transport().open_session()
+
+# 并发执行多个命令
+commands = ['ls', 'pwd', 'whoami']
+for command in commands:
+    # 执行命令并等待结果
+    channel.exec_command(command)
+    exit_status = channel.recv_exit_status()
+
+    # 读取命令的输出
+    output = channel.recv(4096).decode('utf-8')
+
+    # 打印输出结果
+    print(f'Command: {command}')
+    print(f'Exit status: {exit_status}')
+    print(f'Output:\n{output}')
+
+# 关闭连接
+client.close()
 ```

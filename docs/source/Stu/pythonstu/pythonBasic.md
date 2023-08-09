@@ -2389,3 +2389,15 @@ for command in commands:
 # 关闭连接
 client.close()
 ```
+
+```python
+Subsystem sftp internal-sftp
+AllowGroups sftpusers
+
+# 配置 SFTP 监听端口为 20022，或者你喜欢的其他端口
+Match User testa
+        ChrootDirectory /home/sftp/
+        ForceCommand internal-sftp
+        AllowTcpForwarding no
+        X11Forwarding no
+```

@@ -10,6 +10,7 @@ Welcome to Lin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   Stu/index.rst
    other/index.rst
 
 Indices and tables

@@ -10,7 +10,7 @@ Welcome to Lin's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   other/index.rst
+   poem.md
 
 Indices and tables
 ==================

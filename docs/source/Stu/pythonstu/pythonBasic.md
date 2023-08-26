@@ -1,4 +1,4 @@
-# python基础
+# 1. python基础
 
 ## 1. python虚拟环境
 
@@ -676,6 +676,7 @@
                 raise StopIteration
             return self.count
     ```
+
   - 以上为一个迭代器类。
 
 ### 6.2. 迭代器对象
@@ -703,7 +704,7 @@
 ### 6.3. <span id='duixiang'>可迭代对象</span>
 
 - 定义：如果一个类中有`__inter__`方法且该方法返回一个迭代器对象，则我们称以这个类创建的对象为可迭代对象。
-  - - 对比迭代器，可迭代对象只是少了一个`__next__`方法而已。
+    - - 对比迭代器，可迭代对象只是少了一个`__next__`方法而已。
 - 可迭代对象是可以使用for来循环的，在循环的内部其实是先执行`__iter__`方法,然后再在内部执行`next(obj)`，逐步取值的。
   - 所以，凡是能for循环的都是可迭代对象。
 
@@ -1497,18 +1498,18 @@
 - `object`：`object`是一个python的内置类，它是所有类的父类，换句话说，python是默认所有的类都继承自object类,所有类都有object类的属性和方法。
 
 ```python
-# python2写法
+# 2. python2写法
 class clsName(object): # 新式类
   ...
 class ClsName:  # 经典类 没有继承object类的类
-# python3写法
+# 3. python3写法
 class ClsName: # 默认继承object类
   ...
   ```
 
 - pytohn3中如果没有父类可以省略掉`(object)`，python编译器默认会继承object类，需要继承其他父类才写`class ClsName(父类)`。
 
-##### 11.5.1.5. 继承的特性
+##### 3.1. 继承的特性
 
 - **遗传**：当子类继承父类之后，父类有的属性和方法，子类都可以访问到；
 - **重写**
@@ -1543,7 +1544,7 @@ class ClsName: # 默认继承object类
     - 多继承会让代码的可读性变差
   - 所以最好不用多继承，必须用的话，应该用`Mixins`
 
-##### 11.5.1.6. 继承的实现
+##### 3.2. 继承的实现
 
 - 抽象的过程：
   - 抽取这些类的共同属性，创建成一个父类
@@ -1972,7 +1973,7 @@ class ClsName: # 默认继承object类
     - `recv(1024)`：客户端使用，接收消息，1024表示每次最多接收1024个字节。接收到消息后需要进行解码才能正常阅读。`已接受的信息.decode('utf8')`
     - `sendto(msg.encode('utf8'), addr)`:发送消息，msg必须进行编码后才能发送，通常为 `待发送的内容.encode('utf8')`
       - addr：在服务端时为`recvfrom()`方法返回的客户端地址；在客户端时为服务端地址(以元组形式传入ip和端口)
-      - - `close()`：关闭
+        - - `close()`：关闭
 
 ### 15.4. http协议基础
 
@@ -2512,18 +2513,18 @@ class ClsName: # 默认继承object类
 
 - 上述例子打印结果全为3，使用闭包函数后：
 
-  ```python
-  li = []
-  for i in range(3):
-      def outside(i):
-          def func(a):
-              return i+a
-          return func
-      li.append(outside(i))
+```python
+li = []
+for i in range(3):
+    def outside(i):
+        def func(a):
+            return i+a
+        return func
+    li.append(outside(i))
 
-  for j in li:
-      print(j(1)) # 1 2 3
-  ```
+for j in li:
+    print(j(1)) # 1 2 3
+```
 
 - **闭包的作用**：用来在一个函数与一组私有变量之间创建关联关系。在给定函数被多次调用的过程中，这些私有变量能够保持其持久性（保持运行环境与变量的状态）。
 - **闭包的特征**：
@@ -2534,7 +2535,7 @@ class ClsName: # 默认继承object类
 
   | | 装饰器 | 闭包 |
   |-- | -- | -- |
-  | 相同点 | 1. 都是函数的嵌套，分为外层函数和内层函数，而且外层函数要返回内层函数<br>2. 代码实现的逻辑大同小异<>3. 二者都可以实现增加额外功能的目的 |
+  | 相同点 | 1. 都是函数的嵌套，分为外层函数和内层函数，而且外层函数要返回内层函数<br>2. 代码实现的逻辑大同小异<br>3. 二者都可以实现增加额外功能的目的 |
   | 不同点 | 1. 外层函数称为装饰器<br>2. 装饰器的外层函数主要是提供被装饰函数的引用<br>3. 装饰器的外层函数不一定要提供变量<br>4. 装饰器的目的：为被装饰函数提供额外的功能<br>5. 从形式上看，闭包是装饰器的子集 | 1. 外层函数称为闭包<br>2. 闭包的外层函数主要是为了提供自由变量<br>3. 闭包的外层函数必须提供自由变量，否则闭包无意义<br>4. 闭包的目的是保存函数运行环境和局部变量
 
 ## 线程高级应用
@@ -2553,7 +2554,7 @@ class ClsName: # 默认继承object类
   - 创建event对象：`event = threading.Event()`
   - 重置代码中的event对象，使得所有的event事件都处于待命状态：`event.clear()`
   - 阻塞线程：`event.wait()`
-  - 发送event指令，使所有设置改event事件的线程执行：`event.set`
+  - 发送event指令，使所有设置该event事件的线程执行：`event.set`
 - 例：
 
   ```python
@@ -2581,218 +2582,155 @@ class ClsName: # 默认继承object类
 
 #### Condition条件对象
 
+- 一个线程一个线程依次执行
+- **使用方法**
+  - 导入模块：`import threading`
+  - 创建condition对象：`cond = threading.Condition()`
+  - 获取锁：`self.cond.acquire()`
+  - 唤醒其他处于wait状态的线程：`self.cond.notify()`
+  - 进入wait状态等待notify通知：`self.cond.wait()`
+  - 释放锁：`self.cond.release()`
+- 例：
+
+  ```python
+    import threading
+
+    # 新建一个conditon对象
+    cond = threading.Condition()
+
+    class ChatUser1(threading.Thread):
+        def __init__(self, cond, username):
+            threading.Thread.__init__(self, name=username)
+            self.cond = cond
+
+        def run(self):
+            self.cond.acquire()   # 获取锁
+            print("开始成语接龙...")
+            print(self.name + ": 一心一意") # 获取此线程的名字，并说出第一句话
+            self.cond.notify() # 唤醒其他处于wait状态的线程
+            self.cond.wait() # 进入wait状态等待notify通知
+            
+            print(self.name + ": 发人深省")
+            self.cond.notify()
+            self.cond.wait()
+            
+            print(self.name + ": 用兵如神")
+            self.cond.notify()
+            self.cond.release() # 对话完毕，释放锁
+            
+    class ChatUser2(threading.Thread):
+        def __init__(self, cond, username):
+            threading.Thread.__init__(self, name=username)
+            self.cond = cond
+
+        def run(self) -> None:
+            self.cond.acquire()   # 获取锁
+            self.cond.wait() # 等待user1来唤醒
+            
+            print(self.name + ": 意气风发")
+            self.cond.notify()
+            self.cond.wait()
+            
+            print(self.name + ": 省吃俭用")
+            self.cond.notify()
+            self.cond.wait()
+            
+            print(self.name + ": 神马东西")
+            # 这是最后一句话了，所以不用再notify去唤醒其他处于wait的线程
+            self.cond.release() # 对话完毕，释放锁
+
+    if __name__ == '__main__':
+        user1 = ChatUser1(cond, '王一')
+        user2 = ChatUser2(cond, '王二')
+        # 先启动user2,使他处于wait状态,先启动user1，会造成发出notify指令后，user2可能还没启动，导致一直处wait状态   
+        user2.start()
+        user1.start()
+    
+  ```
+
 ### 线程中的消息隔离机制
+
+- 线程内部的全局变量，各线程都可以访问到该变量，且都可以为其设置不同的值。即不同的线程使用同一个变量，但值不同。
+- **实现方法**
+  - 导入模块：`import threading`
+  - 创建local对象：`local_data = threading.local()`
+  - 在各子线程中修改或添加local对象的属性，只对该子线程有效，不影响其他子线程和主线程
+- 例：
+
+  ```python
+  import threading
+
+  local_data = threading.local()  # 创建对象
+  local_data.name = 'local_data' # 设置local_data对象的name属性为local_data
+
+  class MyThread(threading.Thread):
+      def run(self):
+          print('设置name属性前：', threading.current_thread, local_data.__dict__)
+          # 在子线程中修改local_data的name属性
+          local_data.name = self.name  # 设置name属性为线程名(Thread类的构造方法中的实例属性)
+          print('设置name属性后：', threading.current_thread, local_data.__dict__)
+          
+  if __name__ == '__main__':
+      print('子线程运行前，主线程：', local_data.__dict__)
+      
+      t1 = MyThread()
+      t1.start()
+      t1.join
+      
+      t2 = MyThread()
+      t2.start()
+      t2.join
+      
+      print('子线程运行后，主线程：', local_data.__dict__)
+  
+  ```
 
 ### 线程池和进程池
 
-## pytest使用
+### 线程池
 
-### 基本使用
+- 不使用线程池：主线程创建子线程，子线程执行业务，然后线程结束。需要再执行业务时，又需要创建子线程，如此循环。消耗资源过多
+- 使用线程池：主线程创建线程池，线程池中存在若干个子线程，整个程序运行期间，线程池都会存在。需要执行业务时，会调度子线程，执行完毕后，线程池回收该子线程。
+- 线程池：
+- 使用模块：`from concurrent.futures import ThreadPoolExecutor`
+- 该模块的功能：
+  - 主线程可以获取某一个线程或任务的状态，以及返回值；
+  - 当一个线程完成的时候，主线程能够立即知道；
+  - 让多线程和多进程的编码接口一致。
+- 使用步骤：
+  - 导入模块：`from concurrent.futures import ThreadPoolExecutor`
+  - 创建线程池对象：`executor = ThreadPoolExecutor(max_workers=3)`
+    - `max_workers=3`：指定最大线程数量
+  - 提交业务函数到线程池，线程池调度线程来执行：`task = executor.submit(func, value1, value2...)`
+    - `func`：需要执行的函数名
+    - `value1, value2...`：该函数接受的实参
+    - `task`：该方法返回任务句柄，可用过该任务句柄做一些操作
+      - `task.done()`：检查任务是否完成，返回`True/False`;
+      - `task.cancel()`取消任务执行，返回结果`True/False`，该任务没有放入线程池才能取消成功；
+      - `task.result(time=sec)`：拿到任务执行的结果(函数返回值)，该方法是一个阻塞方法
+        - `time=sec`：超时抛出异常，省略或`time=None`表示一直等待
+- 例：
 
-- **第三方模块**：pytest，需要安装。
-- **使用说明**
-  - 文件名尽量以test_开头或结尾;
-  - 函数名必须以test_开头;
-  - 类名必须以Test开头，方法名必须以test_开头，类中不能重写构造方法;
-  - 使用assert进行断言，语法 `assert 布尔表达式`;
-    - 布尔表达式为真则通过，为假报错，pytest就能根据断言结果，从而统计测试用例失败还是通过。
-- **使用步骤**
-  - 导入模块：`import pytest`
-  - 编写测试用例（函数或者方法），每一个函数或者方法就是一个测试用例。
-  - 启动测试：`pytest.main(['参数1','参数2',……,'file/dir'])`
-    - `file/dir`，如果指定的是file，则自动加载该文件下所有满足命名规范的函数或者方法；如果指定的是目录dir，则自动加载该目录下所有test开头的文件中的满足命名规范的函数或者方法。
-    - 输出运行日志
-      - `-q`：显示简略信息（只显示通过数和失败数（失败的信息会显示出来））。
-      - `-s`：显示测试用例中print语句的输出结果。
-      - `-v`：显示详细信息（不包括-s的显示信息）。
-  - 命令行（cmd）方式启动：
-    - `pytest 参数 脚本`
-    - `python -m pytest 参数 脚本`
-- **常用参数**
-  - `-k`：指定关键字，该关键字可以匹配文件名、函数名、类名、方法名，执行匹配到的关键字。
-    - `-k 关键字`
-  - `-x`：在执行测试过程中一旦出现fail的用例，则立即停止测试执行。
-  - `--maxfail=n`：在执行测试过程中一旦出现fail的用例达到n条，则立即停止测试执行。
-  - `-n`：如`-n=5`，支持多线程的分布式运行测试用例（用例多时可以使用）。
-  - `-m`：`-m 标签名`  指定用例标记，指定后只会执行带有该标记的用例。
-    - `-m 标记名`
-    - 如冒烟测试用例，系统测试用例，标记好后，做冒烟测试，就只执行冒烟测试的用例
-    - 如何标记用例？
-      - 在项目根目录下创建文件 `pytest.ini`，在该文件中添加用例标记。多个标记名需要换行且有缩进。
+  ```python
+  from concurrent.futures import ThreadPoolExecutor
+  import time
 
-      ```python
-      [pytest]
-      markers = smoke
-      abc
-      efg
-      ```
+  # 创建一个线程池对象，并且指定线程池中的最大线程数为3
+  executor = ThreadPoolExecutor(max_workers=3)
 
-    - 通过装饰器 `@pytest.mark.标记名` 来标记用例（可以作用于函数、类、方法）。
-- **跳过用例**
-  - `@pytest.mark.skip(reason='msg')`：无条件的跳过用例。
-  - `@pytest.mark.skipif(布尔表达式,reason='msg')`：当布尔表达式结果为True，跳过用例。
-  - `pytest.skip('msg')`：在测试用例内部根据实际使用情况跳过用例。
-- **失败用例重跑**
-  - 第三方模块：`pytest-rerunfailures`，需要安装，不用导入，pytest框架会自动导入。
-  - 通过装饰器 `@pytest.mark.flaky(reruns=n,reruns_delay=t)`实现用例失败后的重跑。
-    - `reruns=n`：指定重跑的次数
-    - `reruns_delay=t`：指定每次运行的间隔时间，单位s
-- **参数化**
-  - 通过装饰器 @pytest.mark.parametrize('用例形参1,…',values) 实现参数操作。
-    - `'用例形参1,…'`：必须与被装饰的函数或者方法的形参保持一致。
-      - 注意多个形参在一对引号内。
-      - `values`：测试数据，通常以列表传入。
-      - 会将列表中的每个元素传给形参，多少个元素就跑多少次用例。
-- **前置与后置**
-  - 模块级
-    - `setup_moudle()`：模块级前置，在当前模块中所有测试用例执行前运行1次。
-    - `teardown_moudle()`：模块级后置，在当前模块中所有测试用例执行后运行1次。
-  - 函数级
-    - `setup_function()`：函数级前置，在当前模块中每一条测试用例执行前运行1次。
-    - `teardown_function()`：函数级后置，在当前模块中每一条测试用例执行后运行1次。
-  - 类级
-    - `setup_class()`：类级前置，在当前类中所有测试用例执行前运行1次。
-    - `teardown_class()`：类级后置，在当前类中所有测试用例执行后运行1次。
-  - 方法级
-    - `setup()/setup_method()`：方法级前置，在当前类中每一条测试用例执行前运行1次。
-    - `teardown/teardown_method()`：方法级后置，在当前类中每一条测试用例执行后运行1次
-- **fixture**
-  - 基本使用
-    - 在项目下创建文件 `conftest.py`，在该文件中编写fixture
-    - 通过装饰器 `@pytest.fixture(name,scope,params,autouse)` 实现。
-      - `name`：指定fixture的名称，如果不指定则默认为被装饰的函数名。
-      - `scope`：指定fixture的作用范围，包括package、session、moudle、class、function（默认）。
-      - `params`：用于接收外部传入的参数。
-      - `autouse`：自动调用。
-    - 调用：
-      - 在测试函数或者方法中通过fixture的名字进行调用。
-      - 在fixture函数中使用 autouse 默认是False，使用True表示启用，对测试脚本生效。
-      - 直接在用例头上使用 @pytest.mark.usefixtures("这里传入你自己定义好的fixture函数名")。
-        - 注意：传入的是字符串
-    - 例子：通过fixture实现前后置，在fixture中实现不同用户的登陆前置（为fixture传参）
-      - `conftest.py`中在被装饰的函数中添加形参 request，在函数内部通过`request.param`获取到外部传入的数据。
-      - 在测试函数或者方法中调用fixture时使用 `pytest.mark.parametrize('fixture名称',[[value1,….]],indirect=True)` 传参。
-      `-`indirect=True`：告诉系统 fixture名称是一个fixture，不能把它作为一个普通参数处理。
+  def get_html(times):
+      time.sleep(times)
+      print(f'获取网页信息{times}完毕')
+      return times
 
-      ```python
-      # conftest.py
-      import pytest,requests
-      @pytest.fixture(name='lg',scope='function')
-      def login(request):
-          rq = requests.session()
-          #前置，实现登陆操作
-          data = request.param  #获取外部传入的数据
-          print(data) #根据传入的数据类型来处理数据
-          url = 'http://localhost:80/login'
-          info = {'username':data[0],'password':data[1],'verifycode':'0000'}
-          rq.post(url=url, data=info)
-          #通过yield返回session对象
-          yield rq
-          #后置，实现注销操作
-          url = 'http://localhost:80/logout'
-          rq.get(url=url)
-      
-      # test_ab.py 给fixture传参实现不同账号登陆
-      @pytest.mark.parametrize('lg',[['admin','admin123']],indirect=True)     #给fixture传参
-      @pytest.mark.parametrize('a',[1,2,3,4,5])
-      def test_caseA(lg,a):
-          assert 1==1
-
-      """test_caseA和test_caseB两条不同的测试用例实现了使用不同的账号登陆，通过为fixture传参"""
-
-      @pytest.mark.parametrize('lg',[['dy','123123']],indirect=True)     #给fixture传参
-      @pytest.mark.parametrize('b',[1,2,3,4,5])
-      def test_caseB(lg,b):
-          assert 1==1
-      ```
-
-- **测试报告**
-  - 模块：`pip install pytest-html`
-  - 使用：在 `pytest.main([])`中添加参数 `--html=path/report_name.html`
-    - `path`：报告保存的路径
-    - `report_name.html`：报告名称
-
-## python实现ssh登陆
-
-```python
-
-import paramiko
-import pytest
-
-# 登录接口的基本信息
-SSH_HOST = '192.168.42.129'
-SSH_PORT = 22
-SSH_USERNAME = 'root'
-SSH_PASSWORD = 'root'
-
-def test_ssh_login_success():
-    # 创建SSH客户端
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-    try:
-        client.connect(hostname=SSH_HOST, port=SSH_PORT, username=SSH_USERNAME, password=SSH_PASSWORD)
-        #  exec_command 方法来执行远程命令。该方法返回一个三元组，包含了命令的标准输入、标准输出和标准错误输出。
-        stdin, stdout, stderr = client.exec_command('tail -3 /var/log/audit/audit.log')
-        output = stdout.read().decode().strip()
-    except paramiko.AuthenticationException:
-        print("ssh连接失败")
-        output = ''
-
-    finally:
-        client.close()
-    assert 'hostname=192.168.42.1 addr=192.168.42.1 terminal=ssh res=success' in output
-
-if __name__ == '__main__':
-    pytest.main(['-s'])
-```
-
-## 并发执行命令
-
-- 有时候，我们需要同时执行多个命令，并等待它们的结果。paramiko 提供了 Channel 类来实现并发执行命令
-
-```python
-import paramiko
-
-# 创建 SSH 客户端对象
-client = paramiko.SSHClient()
-
-# 允许连接到不在 known_hosts 文件中的主机
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-# 连接到远程主机
-client.connect('localhost', username='your_username', password='your_password')
-
-# 打开一个 SSH 会话通道
-channel = client.get_transport().open_session()
-
-# 并发执行多个命令
-commands = ['ls', 'pwd', 'whoami']
-for command in commands:
-    # 执行命令并等待结果
-    channel.exec_command(command)
-    exit_status = channel.recv_exit_status()
-
-    # 读取命令的输出
-    output = channel.recv(4096).decode('utf-8')
-
-    # 打印输出结果
-    print(f'Command: {command}')
-    print(f'Exit status: {exit_status}')
-    print(f'Output:\n{output}')
-
-# 关闭连接
-client.close()
-```
-
-```python
-Subsystem sftp internal-sftp
-AllowGroups sftpusers
-
-# 配置 SFTP 监听端口为 20022，或者你喜欢的其他端口
-Match User testa
-        ChrootDirectory /home/sftp/
-        ForceCommand internal-sftp
-        AllowTcpForwarding no
-        X11Forwarding no
-```
+  # 通过submit方法提交执行的而函数到线程池，submit函数会立即返回，不阻塞主线程
+  task1 = executor.submit(get_html, 5)
+  task2 = executor.submit(get_html, 2)
+  task3 = executor.submit(get_html, 3)
+  task4 = executor.submit(get_html, 2)
+  # time.sleep(3)
+  # print(task1.done()) # 检查任务是否完成，返回结果True/False
+  print(task4.cancel()) # 取消任务的执行，该任务没有放入线程池才能取消成功True/False
+  print(task1.result(timeout=None)) # 拿到任务执行的结果，该方法是一个阻塞方法
+  print('end')
+  ```

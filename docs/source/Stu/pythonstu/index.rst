@@ -10,4 +10,5 @@
 
    pythonBasic.md
    basic.md
+   autotest.md
 

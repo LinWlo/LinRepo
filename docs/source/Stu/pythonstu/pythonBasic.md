@@ -2685,13 +2685,11 @@ for j in li:
   
   ```
 
-### 18.3. 线程池和进程池
-
-### 18.4. 线程池
-
+### 18.3. 线程池
+#### 18.3.1. 基本概念
 - 不使用线程池：主线程创建子线程，子线程执行业务，然后线程结束。需要再执行业务时，又需要创建子线程，如此循环。消耗资源过多
 - 使用线程池：主线程创建线程池，线程池中存在若干个子线程，整个程序运行期间，线程池都会存在。需要执行业务时，会调度子线程，执行完毕后，线程池回收该子线程。
-- 线程池：
+#### 18.3.2. 线程池的使用
 - 使用模块：`from concurrent.futures import ThreadPoolExecutor`
 - 该模块的功能：
   - 主线程可以获取某一个线程或任务的状态，以及返回值；
@@ -2734,3 +2732,77 @@ for j in li:
   print(task1.result(timeout=None)) # 拿到任务执行的结果，该方法是一个阻塞方法
   print('end')
   ```
+#### 18.3.3. 线程池中的常用方法
+- `as_complete(obj_list)`:用于在多个并发任务中，按照完成的顺序返回结果。它接受一个可迭代的 Future 对象列表，并返回一个迭代器，该迭代器会在每个任务完成时产生一个 Future 对象，这样可以获取任务的结果以进行处理。
+  - 作用：
+    - 并发执行任务： 可以将多个任务（使用 `concurrent.futures.ThreadPoolExecutor` 或 `concurrent.futures.ProcessPoolExecutor` 创建的 Future 对象）提交给 as_completed，它会在后台并发地执行这些任务。
+    - 按照完成顺序返回结果： `as_completed`` 会根据任务完成的顺序，返回一个迭代器，当有任务完成时，会返回相应的 Future 对象。
+    - 逐步处理结果： 可以在迭代器中使用 for 循环来逐步处理每个完成的任务的结果。
+    - 这个函数在需要并发执行多个任务，但又希望按照它们的完成顺序来处理结果时非常有用。它可以用于处理网络请求、I/O 操作等情况，使得可以在任务完成时及时获取结果，而不需要等待所有任务都完成后再处理。
+  - 导入模块：`from concurrent.futures import as_complete`
+  ```python
+  # 参照上述例子
+  times = [4 ,2 , 3]
+  tasks = [executor.submit(get_html, task) for task in times]
+
+  for i in as_completed(tasks):
+      data = i.result()
+      print(f"该线程的任务返回值是{data}")
+
+  ```
+- `map(func, iter)`：与 as_completed 类似，但它在返回结果时不是按照完成顺序，而是按照任务提交顺序。
+  ```python
+  # 参照上述例子
+  times = [4 ,2 , 3]
+  for data in executor.map(get_html, times):
+    print(f"该线程的任务返回值是{data}")
+  ```
+- `wait(tasks, return_when=ALL_COMPLETED)`：让主线程阻塞，直到指定条件成立才往下执行
+  - `return_when=ALL_COMPLETED`：等待所有任务执行完成，需要导入`ALL_COMPLETED`
+  - `return_when=FIRST_COMPLETED`：等待第一个任务执行完成，需要导入`FIRST_COMPLETED`
+  - 导入模块：`from concurrent.futures import wait`
+  ```python
+  # 参照上述例子
+  times = [4 ,2 , 3]
+  tasks = [executor.submit(get_html, task) for task in times]
+
+  wait(tasks, return_when=FIRST_COMPLETED) # 第一个任务完成才往下执行
+  print("end")
+  ```
+### 进程池
+#### 实现
+- 使用`ProcessPoolExecutor`类实现。与线程池使用几乎一样
+  - `from concurrent.futures import ProcessPoolExecutor`
+- 使用`Pool`类实现
+  - 使用方法：
+    - `导入模块`：`import multiprocessing`
+    - `pool = multiprocessing.Pool(multiprocessing.cpu_count())`：创建一个进程池对象，指定进程池中的进程数量
+      - `multiprocessing.cpu_count()`：返回当前系统的cpu核心数
+    - `result = pool.apply_async(func, args=())`：异步提交任务给线程池执行
+      - `func`：函数名
+      - `args=()`：函数参数，以元组形式传入
+    - `pool.close()`：提交所有任务之后，调用该方法，表示不再允许添加新任务到进程池中。
+    - `pool.join()`：所有任务都完成后，调用该方法，主进程会等待所有子进程完成，然后关闭进程池，释放资源。
+
+  - 例：
+  ```python
+  import multiprocessing
+  import time
+
+  def get_html(n):
+      time.sleep(n)
+      print(f'{n}子进程执行成功')
+      return n
+
+  if __name__ == '__main__':
+      pool = multiprocessing.Pool(multiprocessing.cpu_count())
+      result = pool.apply_async(get_html, args=(3, )) # 异步提交任务
+      
+      pool.close() # 必须在join前调用
+      pool.join() # 阻塞主进程
+      
+      print(result.get()) # 拿到子进程执行的结果
+      print("end")    
+  ```
+  #### 常用方法
+  - `map(func, iter)`

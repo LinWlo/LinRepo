@@ -2804,5 +2804,6 @@ for j in li:
       print(result.get()) # 拿到子进程执行的结果
       print("end")    
   ```
-  #### 常用方法
-  - `map(func, iter)`
+
+### 线程同步信号量（semaphore）
+- 控制线程同时工作的数量

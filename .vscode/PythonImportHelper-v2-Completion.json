@@ -1,0 +1,136 @@
+[
+    {
+        "label": "sphinx_rtd_theme",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sphinx_rtd_theme",
+        "description": "sphinx_rtd_theme",
+        "detail": "sphinx_rtd_theme",
+        "documentation": {}
+    },
+    {
+        "label": "CommonMarkParser",
+        "importPath": "recommonmark.parser",
+        "description": "recommonmark.parser",
+        "isExtraImport": true,
+        "detail": "recommonmark.parser",
+        "documentation": {}
+    },
+    {
+        "label": "project",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "project = 'Lin'\ncopyright = '2023, lin'\nauthor = 'lin'\nrelease = '1.0'\n# -- General configuration ---------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration\nextensions = ['recommonmark','sphinx_markdown_tables']\ntemplates_path = ['_templates']\nexclude_patterns = []\nlanguage = 'zh_CN'",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "copyright",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "copyright = '2023, lin'\nauthor = 'lin'\nrelease = '1.0'\n# -- General configuration ---------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration\nextensions = ['recommonmark','sphinx_markdown_tables']\ntemplates_path = ['_templates']\nexclude_patterns = []\nlanguage = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "author",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "author = 'lin'\nrelease = '1.0'\n# -- General configuration ---------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration\nextensions = ['recommonmark','sphinx_markdown_tables']\ntemplates_path = ['_templates']\nexclude_patterns = []\nlanguage = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "release",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "release = '1.0'\n# -- General configuration ---------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration\nextensions = ['recommonmark','sphinx_markdown_tables']\ntemplates_path = ['_templates']\nexclude_patterns = []\nlanguage = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output\nimport sphinx_rtd_theme",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "extensions",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "extensions = ['recommonmark','sphinx_markdown_tables']\ntemplates_path = ['_templates']\nexclude_patterns = []\nlanguage = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output\nimport sphinx_rtd_theme\nhtml_theme = 'sphinx_rtd_theme'\nhtml_theme_path = [sphinx_rtd_theme.get_html_theme_path()]\nhtml_static_path = ['_static']",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "templates_path",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "templates_path = ['_templates']\nexclude_patterns = []\nlanguage = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output\nimport sphinx_rtd_theme\nhtml_theme = 'sphinx_rtd_theme'\nhtml_theme_path = [sphinx_rtd_theme.get_html_theme_path()]\nhtml_static_path = ['_static']\nfrom recommonmark.parser import CommonMarkParser",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "exclude_patterns",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "exclude_patterns = []\nlanguage = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output\nimport sphinx_rtd_theme\nhtml_theme = 'sphinx_rtd_theme'\nhtml_theme_path = [sphinx_rtd_theme.get_html_theme_path()]\nhtml_static_path = ['_static']\nfrom recommonmark.parser import CommonMarkParser\nsource_parsers = {",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "language",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "language = 'zh_CN'\n# -- Options for HTML output -------------------------------------------------\n# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output\nimport sphinx_rtd_theme\nhtml_theme = 'sphinx_rtd_theme'\nhtml_theme_path = [sphinx_rtd_theme.get_html_theme_path()]\nhtml_static_path = ['_static']\nfrom recommonmark.parser import CommonMarkParser\nsource_parsers = {\n'.md': CommonMarkParser,",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "html_theme",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "html_theme = 'sphinx_rtd_theme'\nhtml_theme_path = [sphinx_rtd_theme.get_html_theme_path()]\nhtml_static_path = ['_static']\nfrom recommonmark.parser import CommonMarkParser\nsource_parsers = {\n'.md': CommonMarkParser,\n}\nsource_suffix = ['.rst', '.md']",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "html_theme_path",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]\nhtml_static_path = ['_static']\nfrom recommonmark.parser import CommonMarkParser\nsource_parsers = {\n'.md': CommonMarkParser,\n}\nsource_suffix = ['.rst', '.md']",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "html_static_path",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "html_static_path = ['_static']\nfrom recommonmark.parser import CommonMarkParser\nsource_parsers = {\n'.md': CommonMarkParser,\n}\nsource_suffix = ['.rst', '.md']",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "source_parsers",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "source_parsers = {\n'.md': CommonMarkParser,\n}\nsource_suffix = ['.rst', '.md']",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    },
+    {
+        "label": "source_suffix",
+        "kind": 5,
+        "importPath": "docs.source.conf",
+        "description": "docs.source.conf",
+        "peekOfCode": "source_suffix = ['.rst', '.md']",
+        "detail": "docs.source.conf",
+        "documentation": {}
+    }
+]
